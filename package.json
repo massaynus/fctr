@@ -1,0 +1,26 @@
+{
+  "name": "factorial",
+  "version": "1.0.0",
+  "main": "request.js",
+  "scripts": {
+    "build": "npx tsc",
+    "watch:build": "npx tsc --watch",
+    "watch:run": "npx nodemon dist/index.js",
+    "watch:start": "npm run watch:build & npm run watch:run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
+    "puppeteer": "^23.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "typescript": "^5.6.3"
+  }
+}
