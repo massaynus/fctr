@@ -11,6 +11,7 @@ export function makeCreateShiftQuery(shift: TShift) {
     r.variables.clockIn = clockIn
     r.variables.clockOut = clockOut
     r.variables.date = date
+    r.variables.referenceDate = date
     r.variables.workable = shift.workable
 
     return r

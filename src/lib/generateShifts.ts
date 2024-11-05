@@ -1,3 +1,4 @@
+import { ignoredDates } from "../config/ignoreDates";
 import dayjs, { Dayjs } from "dayjs";
 
 export type TShift = {
@@ -5,8 +6,6 @@ export type TShift = {
     to: Dayjs;
     workable: boolean;
 };
-
-const ignoredDates = new Set<string>(process.env.IGNORED_DATES?.split(','))
 
 export function generateDates(month: number, year: number): Dayjs[] {
 
