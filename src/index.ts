@@ -2,7 +2,9 @@ import 'dotenv/config'
 import { generateDates, generateRandomNumber, generateShift } from "./lib/generateShifts";
 import CreateCookies from "./lib/cookieLoader"
 import { makeCreateShiftQuery } from "./lib/makeCreateShiftQuery";
-import { post } from './lib/api';
+import { post } from './lib/api/api';
+import waitFor from './utils/waitFor';
+import stringfyShift from './utils/stringfyShit';
 
 const email = process.env.EMAIL
 const password = process.env.PASSWORD
@@ -27,18 +29,17 @@ async function main() {
 
 
     for (const shift of shifts) {
-        console.log("generating request for shift: ", shift)
+        const s = stringfyShift(shift)
+        console.log("generating request for shift: ", s)
         const request = makeCreateShiftQuery(shift)
 
-        console.log("sending request for shift: ", shift)
+        console.log("sending request for shift: ", s)
         const response = await post('https://api.factorialhr.com/graphql', request, cookies)
 
-        console.log("Got response for shift", response.status, shift, response)
+        console.log("Got response for shift", response.status)
+        // await waitFor(1 * 1000)
     }
-
-
-    return 0;
 }
 
 
-main().then(console.log).catch(console.log)
+main().then().catch(console.log)

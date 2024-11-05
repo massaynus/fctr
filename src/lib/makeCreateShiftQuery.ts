@@ -1,4 +1,4 @@
-import request from '../body.json'
+import request from './api/body'
 import { TShift } from './generateShifts'
 
 

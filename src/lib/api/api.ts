@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from "axios";
 import { Cookie } from "puppeteer";
 
 export async function post(url: string, request: any, cookies: Cookie[]): Promise<AxiosResponse> {
-
     return await axios.post(url, request, {
         headers: {
             "accept": "*/*",
@@ -18,7 +17,9 @@ export async function post(url: string, request: any, cookies: Cookie[]): Promis
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-site",
             "x-deployment-phase": "default",
-            "cookie": cookies.map(c => `${c.name}=${c.value}`).join(';')
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0",
+            "cookie": cookies.map(c => `${c.name}=${c.value}`).join(';'),
+            "origin": "https://app.factorialhr.com",
         },
     })
 

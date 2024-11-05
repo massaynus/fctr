@@ -1,7 +1,8 @@
 import puppeteer, { Cookie } from "puppeteer";
+import waitFor from "../utils/waitFor";
 
 export default async function CreateCookies(email: string, password: string): Promise<Cookie[]> {
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({ headless: false, slowMo: 30, defaultViewport: { width: 1920, height: 1080 } })
 
     try {
         const page = await browser.newPage()
@@ -17,9 +18,13 @@ export default async function CreateCookies(email: string, password: string): Pr
         await passwordInput.fill(password)
         await submitBtn.click()
 
-        await page.waitForSelector(`[title="Dashboard"]`)
+        const clockInEl = await page.locator(`a[href="/attendance/clock-in"]`)
+        await clockInEl.click()
 
-        const cookies = await page.cookies()
+        await page.waitForNetworkIdle()
+
+        await waitFor(10 * 1000)
+        const cookies = await page.cookies('https://api.factorialhr.com')
         return cookies
     } catch (e) {
         throw e
